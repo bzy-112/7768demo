@@ -1,0 +1,27 @@
+# 编译输出
+Output/
+Listing/
+*.hex
+*.axf
+*.bin
+
+# MDK 工程——用户相关
+*.uvgui.*
+*.uvproj.saved_uv4
+*.uvopt.saved_uv4
+*.scvd
+JLinkLog.txt
+JLinkSettings.ini
+DebugConfig/
+RTE/
+
+# 临时文件
+*.o
+*.d
+*.crf
+*.__i
+*.lst
+*.map
+*.bak
+*.dep
+*.iex
