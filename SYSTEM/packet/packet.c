@@ -66,12 +66,12 @@ uint8_t Packet_Parse(Packet_t *pkt, uint8_t *raw, uint16_t len)
 }
 
 /*******************************************************************************
- * 追加数据: 向载荷末尾拼接数据，检查剩余空间
+ * 追加数据: 向载荷末尾拼接数据，超出 PACKET_MY_PAYLOAD_SIZE 时拒绝
 *******************************************************************************/
 uint8_t Packet_Append(Packet_t *pkt, uint8_t *data, uint16_t len)
 {
     if ((pkt == NULL) || (data == NULL)) return 1;
-    if (pkt->payloadLen + len > sizeof(pkt->payload)) return 1;
+    if (pkt->payloadLen + len > PACKET_MY_PAYLOAD_SIZE) return 1;
 
     memcpy(&pkt->payload[pkt->payloadLen], data, len);
     pkt->payloadLen += len;
@@ -80,7 +80,7 @@ uint8_t Packet_Append(Packet_t *pkt, uint8_t *data, uint16_t len)
 
 /*******************************************************************************
  * 组帧: 将 pkt->payload 打包，添加帧头+长度+CRC8+帧尾，输出到 frame
- * frame大小至少为 PACKET_TX_FRAME_SIZE 字节
+ * 前置条件: payloadLen 必须 == PACKET_MY_PAYLOAD_SIZE，数据不完整拒绝组帧
 *******************************************************************************/
 uint8_t Packet_Build(Packet_t *pkt, uint8_t *frame, uint16_t *frmLen)
 {
@@ -88,6 +88,7 @@ uint8_t Packet_Build(Packet_t *pkt, uint8_t *frame, uint16_t *frmLen)
     uint8_t  crc;
 
     if ((pkt == NULL) || (frame == NULL) || (frmLen == NULL)) return 1;
+    if (pkt->payloadLen != PACKET_MY_PAYLOAD_SIZE) return 1;
 
     totalLen = PACKET_OVERHEAD + pkt->payloadLen;
 
