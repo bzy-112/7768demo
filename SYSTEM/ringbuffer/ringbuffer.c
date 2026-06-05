@@ -97,6 +97,7 @@ uint16_t RingBuffer_Read(RingBuffer_t *rb, uint8_t *dst, uint16_t len)
 *******************************************************************************/
 uint8_t RingBuffer_IsEmpty(RingBuffer_t *rb)
 {
+    if (rb == NULL) return 1;
     return (rb->head == rb->tail) ? 1 : 0;
 }
 
@@ -105,6 +106,7 @@ uint8_t RingBuffer_IsEmpty(RingBuffer_t *rb)
 *******************************************************************************/
 uint16_t RingBuffer_DataCount(RingBuffer_t *rb)
 {
+    if (rb == NULL) return 0;
     if (rb->head >= rb->tail)
         return (rb->head - rb->tail);
     else
@@ -116,6 +118,7 @@ uint16_t RingBuffer_DataCount(RingBuffer_t *rb)
 *******************************************************************************/
 uint16_t RingBuffer_SpaceCount(RingBuffer_t *rb)
 {
+    if (rb == NULL) return 0;
     return (rb->size - 1 - RingBuffer_DataCount(rb));
 }
 
@@ -124,6 +127,7 @@ uint16_t RingBuffer_SpaceCount(RingBuffer_t *rb)
 *******************************************************************************/
 void RingBuffer_Flush(RingBuffer_t *rb)
 {
+    if (rb == NULL) return;
     rb->head = 0;
     rb->tail = 0;
 }
@@ -169,6 +173,7 @@ uint16_t RingBuffer_Skip(RingBuffer_t *rb, uint16_t len)
 {
     uint16_t avail;
 
+    if (rb == NULL) return 0;
     if (rb->head >= rb->tail)
         avail = rb->head - rb->tail;
     else

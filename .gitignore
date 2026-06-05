@@ -6,11 +6,11 @@ Listing/
 *.bin
 
 # MDK 工程——用户相关
-*.uvgui.*
+*.uvgui*
 *.uvproj.saved_uv4
 *.uvopt.saved_uv4
 *.scvd
-JLinkLog.txt
+JLink*.txt
 JLinkSettings.ini
 DebugConfig/
 RTE/

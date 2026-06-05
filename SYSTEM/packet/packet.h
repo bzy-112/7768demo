@@ -84,7 +84,7 @@ uint8_t  Packet_Append(Packet_t *pkt, uint8_t *data, uint16_t len);
 uint8_t  Packet_Build(Packet_t *pkt, uint8_t *frame, uint16_t *frmLen);
 
 /* 在字节流中查找帧头 SYNC1+SYNC2，返回索引，未找到返回0xFFFF */
-uint16_t Packet_FindHeader(uint8_t *buf, uint16_t len);
+//uint16_t Packet_FindHeader(uint8_t *buf, uint16_t len);
 
 /* 计算CRC8校验值，多项式0x07 */
 uint8_t  Packet_CRC8(uint8_t *data, uint16_t len);

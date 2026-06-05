@@ -12,7 +12,7 @@
 #ifndef _ringbuffer_h_
 #define _ringbuffer_h_
 
-#include "sys.h"
+#include <stdint.h>
 
 typedef struct
 {

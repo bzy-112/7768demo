@@ -8,7 +8,7 @@ void Packet_Init(Packet_t *pkt)
 {
     if (pkt == NULL) return;
 
-    memset(pkt->payload, 0, sizeof(pkt->payload));
+    memset(pkt->payload, 0, PACKET_MY_PAYLOAD_SIZE);
     pkt->payloadLen = 0;
     pkt->nodeId     = PACKET_NODE_ID;
 }
@@ -140,6 +140,6 @@ void Packet_Clear(Packet_t *pkt)
     if (pkt != NULL)
     {
         pkt->payloadLen = 0;
-        memset(pkt->payload, 0, sizeof(pkt->payload));
+        memset(pkt->payload, 0, PACKET_MY_PAYLOAD_SIZE);
     }
 }
